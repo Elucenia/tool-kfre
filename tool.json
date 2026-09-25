@@ -1,0 +1,210 @@
+{
+  "tool": {
+    "id": "kfre",
+    "title": "KFRE (Kidney Failure Risk Equation)",
+    "short": "Risco de falência renal em 2 e 5 anos",
+    "desc": "Calcule o KFRE de 4 variáveis: risco de falência renal (diálise ou transplante) em 2 e 5 anos na doença renal crônica G3 a G5, com calibração fora da América do Norte.",
+    "lead": "Estima a probabilidade de falência renal com necessidade de diálise ou transplante em 2 e 5 anos, a partir de idade, sexo, TFG e albuminúria, em adultos com doença renal crônica G3 a G5.",
+    "spec": [
+      "nefrologia",
+      "clinica-medica",
+      "medicina-de-familia-e-comunidade",
+      "endocrinologia-e-metabologia"
+    ],
+    "tier": 1,
+    "fields": [
+      [
+        "idade",
+        "Idade",
+        "num",
+        {
+          "min": 18,
+          "max": 110,
+          "unit": "anos",
+          "ph": "60"
+        }
+      ],
+      [
+        "sexo",
+        "Sexo",
+        "radio",
+        {
+          "opts": {
+            "F": "Feminino",
+            "M": "Masculino"
+          }
+        }
+      ],
+      [
+        "tfg",
+        "TFG estimada",
+        "num",
+        {
+          "min": 1,
+          "max": 120,
+          "unit": "mL/min/1,73 m²",
+          "ph": "30"
+        }
+      ],
+      [
+        "rac",
+        "Relação albumina/creatinina urinária (RAC)",
+        "num",
+        {
+          "min": 1,
+          "max": 10000,
+          "step": 0.1,
+          "unit": "mg/g",
+          "ph": "300"
+        }
+      ]
+    ],
+    "formula": "<p>Risco = 1 − S₀<sup>exp(PL)</sup>, com</p><p>PL = −0,2201 × (idade/10 − 7,036) + 0,2467 × (homem − 0,5642) − 0,5567 × (TFG/5 − 7,222) + 0,451 × (ln RAC − 5,137).</p><p>S₀ (calibração fora da América do Norte): <strong>0,9832</strong> em 2 anos e <strong>0,9365</strong> em 5 anos. RAC em mg/g (mg/mmol × 8,84).</p>",
+    "table": [
+      [
+        "Risco",
+        "Conduta (KDIGO 2024)"
+      ],
+      [
+        "5 anos &lt; 3%",
+        "Seguimento na atenção primária"
+      ],
+      [
+        "5 anos ≥ 3% (3 a 5%)",
+        "Encaminhar ao nefrologista"
+      ],
+      [
+        "2 anos &gt; 10%",
+        "Cuidado multidisciplinar"
+      ],
+      [
+        "2 anos &gt; 40%",
+        "Planejar terapia renal substitutiva (acesso vascular, transplante)"
+      ]
+    ],
+    "tips": [
+      "Use em adultos com TFG &lt; 60 mL/min/1,73 m². Acima disso, o risco de falência é muito baixo e a equação não foi validada.",
+      "A calibração fora da América do Norte foi a recomendada pelos autores para populações de fora dos EUA e do Canadá, como o Brasil.",
+      "O KFRE prevê falência renal, não mortalidade: em idosos frágeis, o risco competitivo de morte pode ser maior que o de diálise.",
+      "Não use em lesão renal aguda nem com TFG instável: o modelo pressupõe função estável.",
+      "Se o laboratório liberar a RAC em mg/mmol, multiplique por 8,84 para obter mg/g."
+    ],
+    "sources": [
+      [
+        "Tangri N et al. A predictive model for progression of chronic kidney disease to kidney failure. JAMA, 2011.",
+        "https://doi.org/10.1001/jama.2011.451"
+      ],
+      [
+        "Tangri N et al. Multinational assessment of accuracy of equations for predicting risk of kidney failure: a meta-analysis. JAMA, 2016.",
+        "https://doi.org/10.1001/jama.2015.18202"
+      ],
+      [
+        "Kidney Disease: Improving Global Outcomes (KDIGO) CKD Work Group. KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease. Kidney Int, 2024.",
+        "https://doi.org/10.1016/j.kint.2023.10.018"
+      ]
+    ],
+    "cases": [
+      [
+        "Mulher, 70 anos, TFG 50, RAC 10: 0,34% em 5 anos (baixo)",
+        {
+          "idade": 70,
+          "sexo": "F",
+          "tfg": 50,
+          "rac": 10
+        },
+        {
+          "raw": {
+            "r2": 0.088,
+            "r5": 0.341
+          },
+          "level": "low",
+          "tol": 0.01
+        }
+      ],
+      [
+        "Homem, 60 anos, TFG 30, RAC 300: 5,9% em 2 anos e 20,9% em 5 anos (encaminhar)",
+        {
+          "idade": 60,
+          "sexo": "M",
+          "tfg": 30,
+          "rac": 300
+        },
+        {
+          "raw": {
+            "r2": 5.863,
+            "r5": 20.86
+          },
+          "main": "20,9",
+          "level": "mid",
+          "tol": 0.01
+        }
+      ],
+      [
+        "Homem, 50 anos, TFG 15, RAC 2000: 61,0% em 2 anos (planejar TRS)",
+        {
+          "idade": 50,
+          "sexo": "M",
+          "tfg": 15,
+          "rac": 2000
+        },
+        {
+          "raw": {
+            "r2": 60.981,
+            "r5": 97.386
+          },
+          "level": "high",
+          "verdict": "≥ 40%",
+          "tol": 0.01
+        }
+      ]
+    ],
+    "batch": "renal-digestivo",
+    "kind": "Calculadora",
+    "config": null,
+    "areaId": "renal-digestivo",
+    "clinicalReview": "pending",
+    "sourceReview": "pending",
+    "sourceFile": "app/content/ferramentas/renal-digestivo.php",
+    "arithmeticTest": {
+      "status": "passed",
+      "testedAt": "2026-09-25",
+      "total": 3,
+      "passed": 3,
+      "failures": []
+    },
+    "independentArithmeticTest": {
+      "status": "not-tested",
+      "testedAt": null,
+      "total": 0,
+      "passed": 0,
+      "cases": []
+    }
+  },
+  "review": {
+    "id": "kfre",
+    "status": "restricted",
+    "reason": "O código mantém constantes de risco e calcula mesmo com TFGe ≥60, exibindo apenas uma nota. KDIGO requer equação externamente validada na população apropriada G3–G5; verificar calibração geográfica e impedir extrapolação G1–G2 antes de liberar o risco predito. Cálculo suspenso até confirmar elegibilidade e calibração.",
+    "sourceUrl": "https://kdigo.org/wp-content/uploads/2024/03/KDIGO-2024-CKD-Guideline.pdf",
+    "sourceTitle": "KDIGO 2024 Clinical Practice Guideline for CKD",
+    "sourceDate": "2024-03",
+    "publisherRegion": "Internacional / KDIGO",
+    "checkedAt": "2026-09-25",
+    "clinicalValidation": "not-performed",
+    "suppressLegacyFormula": true,
+    "formulaOverride": "KFRE de quatro variáveis: idade, sexo, TFGe e relação albumina/creatinina. Exige seleção da calibração publicada e população elegível; constantes e recomendações em revisão.",
+    "replacementReadings": [
+      {
+        "url": "https://kdigo.org/wp-content/uploads/2024/03/KDIGO-2024-CKD-Guideline.pdf",
+        "title": "KDIGO 2024 Clinical Practice Guideline for CKD",
+        "date": "2024-03",
+        "region": "Internacional / KDIGO"
+      }
+    ]
+  },
+  "sourceFile": {
+    "path": "app/content/ferramentas/renal-digestivo.php",
+    "sha256": "95087d729438637d36e1a49af04d8de0fe1d9f7876443084443906a9281ef107",
+    "bytes": 109421
+  },
+  "clinicalValidation": "not-performed"
+}

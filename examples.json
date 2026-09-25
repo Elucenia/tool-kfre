@@ -1,0 +1,76 @@
+[
+  {
+    "label": "Mulher, 70 anos, TFG 50, RAC 10: 0,34% em 5 anos (baixo)",
+    "input": {
+      "idade": 70,
+      "sexo": "F",
+      "tfg": 50,
+      "rac": 10
+    },
+    "expected": {
+      "raw": {
+        "r2": 0.088,
+        "r5": 0.341
+      },
+      "level": "low",
+      "tol": 0.01
+    },
+    "originalInput": {
+      "idade": 70,
+      "sexo": "F",
+      "tfg": 50,
+      "rac": 10
+    },
+    "expandedZeroOptions": []
+  },
+  {
+    "label": "Homem, 60 anos, TFG 30, RAC 300: 5,9% em 2 anos e 20,9% em 5 anos (encaminhar)",
+    "input": {
+      "idade": 60,
+      "sexo": "M",
+      "tfg": 30,
+      "rac": 300
+    },
+    "expected": {
+      "raw": {
+        "r2": 5.863,
+        "r5": 20.86
+      },
+      "main": "20,9",
+      "level": "mid",
+      "tol": 0.01
+    },
+    "originalInput": {
+      "idade": 60,
+      "sexo": "M",
+      "tfg": 30,
+      "rac": 300
+    },
+    "expandedZeroOptions": []
+  },
+  {
+    "label": "Homem, 50 anos, TFG 15, RAC 2000: 61,0% em 2 anos (planejar TRS)",
+    "input": {
+      "idade": 50,
+      "sexo": "M",
+      "tfg": 15,
+      "rac": 2000
+    },
+    "expected": {
+      "raw": {
+        "r2": 60.981,
+        "r5": 97.386
+      },
+      "level": "high",
+      "verdict": "≥ 40%",
+      "tol": 0.01
+    },
+    "originalInput": {
+      "idade": 50,
+      "sexo": "M",
+      "tfg": 15,
+      "rac": 2000
+    },
+    "expandedZeroOptions": []
+  }
+]
