@@ -158,13 +158,9 @@
         }
       ]
     ],
-    "batch": "renal-digestivo",
     "kind": "Calculadora",
     "config": null,
-    "areaId": "renal-digestivo",
     "clinicalReview": "pending",
-    "sourceReview": "pending",
-    "sourceFile": "app/content/ferramentas/renal-digestivo.php",
     "arithmeticTest": {
       "status": "passed",
       "testedAt": "2026-09-25",
@@ -200,11 +196,6 @@
         "region": "Internacional / KDIGO"
       }
     ]
-  },
-  "sourceFile": {
-    "path": "app/content/ferramentas/renal-digestivo.php",
-    "sha256": "95087d729438637d36e1a49af04d8de0fe1d9f7876443084443906a9281ef107",
-    "bytes": 109421
   },
   "clinicalValidation": "not-performed"
 }
